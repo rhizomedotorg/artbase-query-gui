@@ -1,0 +1,31 @@
+{
+    "api": {
+      "sparql": {
+        "uri": "https://query.artbase.rhizome.org/proxy/wdqs/bigdata/namespace/wdq/sparql"
+      },
+      "wikibase": {
+        "uri": "https://query.artbase.rhizome.org/proxy/wikibase/w/api.php"
+      },
+      "examples": {
+        "server": "https://query.artbase.rhizome.org/proxy/wikibase/",
+        "apiPath": "w/api.php",
+        "pageTitle": "Query/Examples",
+        "pagePathElement": "wiki/"
+      },
+      "urlShortener": "tinyurl",
+      "query-builder": {
+        "server": "https://query-builder-test.toolforge.org/"
+      }
+    },
+    "brand": {
+      "title": "ArtBase Query",
+      "logo": "https://artbase.rhizome.org/w/resources/assets/artbase/Rhizome-Logo-Web.svg",
+      "favicon": "https://rhizome.global.ssl.fastly.net/static/favicon/favicon.ico?v=xQQqrB8XAN1",
+      "copyrightUrl": "https://artbase.rhizome.org/wiki/Copyright"
+    },
+    "location": {
+      "root": "./",
+      "index": "./"
+    },
+    "prefixes": {}
+  }

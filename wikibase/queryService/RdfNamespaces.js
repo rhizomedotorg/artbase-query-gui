@@ -6,6 +6,26 @@ wikibase.queryService.RdfNamespaces = {};
 	'use strict';
 
 	RdfNamespaces.NAMESPACE_SHORTCUTS = {
+		ArtBase: {
+			r: 'https://artbase.rhizome.org/entity/',
+			rt: 'https://artbase.rhizome.org/prop/direct/',
+			rtn: 'https://artbase.rhizome.org/prop/direct-normalized/',
+			rs: 'https://artbase.rhizome.org/entity/statement/',
+			rp: 'https://artbase.rhizome.org/prop/',
+			rref: 'https://artbase.rhizome.org/reference/',
+			rv: 'https://artbase.rhizome.org/value/',
+			rps: 'https://artbase.rhizome.org/prop/statement/',
+			rpsv: 'https://artbase.rhizome.org/prop/statement/value/',
+			rpsn: 'https://artbase.rhizome.org/prop/statement/value-normalized/',
+			rpq: 'https://artbase.rhizome.org/prop/qualifier/',
+			rpqv: 'https://artbase.rhizome.org/prop/qualifier/value/',
+			rpqn: 'https://artbase.rhizome.org/prop/qualifier/value-normalized/',
+			rpr: 'https://artbase.rhizome.org/prop/reference/',
+			rprv: 'https://artbase.rhizome.org/prop/reference/value/',
+			rprn: 'https://artbase.rhizome.org/prop/reference/value-normalized/',
+			rno: 'https://artbase.rhizome.org/prop/novalue/',
+			rdata: 'https://artbase.rhizome.org/wiki/Special:EntityData/',
+		},
 		Wikidata: {
 			wikibase: 'http://wikiba.se/ontology#',
 			wd: 'http://www.wikidata.org/entity/',
@@ -25,7 +45,8 @@ wikibase.queryService.RdfNamespaces = {};
 			prv: 'http://www.wikidata.org/prop/reference/value/',
 			prn: 'http://www.wikidata.org/prop/reference/value-normalized/',
 			wdno: 'http://www.wikidata.org/prop/novalue/',
-			wdata: 'http://www.wikidata.org/wiki/Special:EntityData/'
+			wdata: 'http://www.wikidata.org/wiki/Special:EntityData/',
+			wdqs: 'https://query.wikidata.org/sparql'
 		},
 		W3C: {
 			rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
@@ -51,21 +72,21 @@ wikibase.queryService.RdfNamespaces = {};
 	};
 
 	RdfNamespaces.ENTITY_TYPES = {
-		'http://www.wikidata.org/prop/direct/': 'property',
-		'http://www.wikidata.org/prop/direct-normalized/': 'property',
-		'http://www.wikidata.org/prop/': 'property',
-		'http://www.wikidata.org/prop/novalue/': 'property',
-		'http://www.wikidata.org/prop/statement/': 'property',
-		'http://www.wikidata.org/prop/statement/value/': 'property',
-		'http://www.wikidata.org/prop/statement/value-normalized/': 'property',
-		'http://www.wikidata.org/prop/qualifier/': 'property',
-		'http://www.wikidata.org/prop/qualifier/value/': 'property',
-		'http://www.wikidata.org/prop/qualifier/value-normalized/': 'property',
-		'http://www.wikidata.org/prop/reference/': 'property',
-		'http://www.wikidata.org/prop/reference/value/': 'property',
-		'http://www.wikidata.org/prop/reference/value-normalized/': 'property',
-		'http://www.wikidata.org/wiki/Special:EntityData/': 'item',
-		'http://www.wikidata.org/entity/': 'item'
+		'https://artbase.rhizome.org/prop/direct/': 'property',
+		'https://artbase.rhizome.org/prop/direct-normalized/': 'property',
+		'https://artbase.rhizome.org/prop/': 'property',
+		'https://artbase.rhizome.org/prop/novalue/': 'property',
+		'https://artbase.rhizome.org/prop/statement/': 'property',
+		'https://artbase.rhizome.org/prop/statement/value/': 'property',
+		'https://artbase.rhizome.org/prop/statement/value-normalized/': 'property',
+		'https://artbase.rhizome.org/prop/qualifier/': 'property',
+		'https://artbase.rhizome.org/prop/qualifier/value/': 'property',
+		'https://artbase.rhizome.org/prop/qualifier/value-normalized/': 'property',
+		'https://artbase.rhizome.org/prop/reference/': 'property',
+		'https://artbase.rhizome.org/prop/reference/value/': 'property',
+		'https://artbase.rhizome.org/prop/reference/value-normalized/': 'property',
+		'https://artbase.rhizome.org/wiki/Special:EntityData/': 'item',
+		'https://artbase.rhizome.org/entity/': 'item'
 	};
 
 	RdfNamespaces.ALL_PREFIXES = $.map( RdfNamespaces.NAMESPACE_SHORTCUTS, function ( n ) {
@@ -75,12 +96,18 @@ wikibase.queryService.RdfNamespaces = {};
 	}, {} );
 
 	RdfNamespaces.STANDARD_PREFIXES = {
-		wd: 'PREFIX wd: <http://www.wikidata.org/entity/>',
-		wdt: 'PREFIX wdt: <http://www.wikidata.org/prop/direct/>',
+		r: 'PREFIX r: <https://artbase.rhizome.org/erity/>',
+		rt: 'PREFIX rt: <https://artbase.rhizome.orrprop/direct/>',
+		rp: 'PREFIX rp: <https://artbase.rhizome.org/prrop/>',
+		rps: 'PREFIX rps: <https://artbase.rhizome.org/rprop/statement/>',
+		rpq: 'PREFIX rpq: <https://artbase.rhizome.org/prrop/qualifier/>',
+
+		// wd: 'PREFIX wd: <http://www.wikidata.org/entity/>',
+		// wdt: 'PREFIX wdt: <http://www.wikidata.org/prop/direct/>',
 		wikibase: 'PREFIX wikibase: <http://wikiba.se/ontology#>',
-		p: 'PREFIX p: <http://www.wikidata.org/prop/>',
-		ps: 'PREFIX ps: <http://www.wikidata.org/prop/statement/>',
-		pq: 'PREFIX pq: <http://www.wikidata.org/prop/qualifier/>',
+		// p: 'PREFIX p: <http://www.wikidata.org/prop/>',
+		// ps: 'PREFIX ps: <http://www.wikidata.org/prop/statement/>',
+		// pq: 'PREFIX pq: <http://www.wikidata.org/prop/qualifier/>',
 		rdfs: 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>',
 		bd: 'PREFIX bd: <http://www.bigdata.com/rdf#>'
 	};

@@ -1,4 +1,4 @@
-var wikibase = window.wikibase || {};
+var wikibase = wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
@@ -84,7 +84,7 @@ wikibase.queryService.ui.resultBrowser.ImageResultBrowser = ( function( $, _ ) {
 		$element.html( this._grid );
 		this._lineHeight = 1.5 * parseFloat( this._grid.css( 'font-size' ) );
 		this._iterateResult( function( field, key, row ) {
-			if ( field && self._isCommonsResource( field.value ) ) {
+			if ( field && self._isMediaResource( field.value ) ) {
 				row.url = field.value;
 				self._queue.push( row );
 			}
@@ -243,7 +243,7 @@ wikibase.queryService.ui.resultBrowser.ImageResultBrowser = ( function( $, _ ) {
 		var self = this,
 			itemLoaded = $.Deferred(),
 			url = this._getThumbnail( itemData.url, 1024 ),
-			fileName = this._getFormatter().getCommonsResourceFileName( url ),
+			fileName = this._getFormatter().getMediaResourceFileName( url ),
 			item = this._getItem( this._getThumbnail( url ), this._getThumbnail( url, 1024 ), fileName, itemData ),
 			fixedHeight = this._lineHeight * item.find( '.summary' )[ 0 ].childElementCount,
 			img = item.find( '.item-img' );
@@ -288,7 +288,7 @@ wikibase.queryService.ui.resultBrowser.ImageResultBrowser = ( function( $, _ ) {
 	 */
 	SELF.prototype._getItem = function( thumbnailUrl, url, title, row ) {
 		var $image = $( '<a>' )
-				.click( this._getFormatter().handleCommonResourceItem )
+				.click( this._getFormatter().handleMediaResourceItem )
 				.attr( { href: url, 'data-gallery': 'g', 'data-title': title } )
 				.append( $( '<img class="item-img" >' ) ),
 			$summary = this._getFormatter().formatRow( row ).addClass( 'summary' );
@@ -299,15 +299,15 @@ wikibase.queryService.ui.resultBrowser.ImageResultBrowser = ( function( $, _ ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._isCommonsResource = function( url ) {
-		return this._getFormatter().isCommonsResource( url );
+	SELF.prototype._isMediaResource = function( url ) {
+		return this._getFormatter().isMediaResource( url );
 	};
 
 	/**
 	 * @private
 	 */
 	SELF.prototype._getThumbnail = function( url, width ) {
-		return this._getFormatter().getCommonsResourceThumbnailUrl( url, width );
+		return this._getFormatter().getMediaResourceThumbnailUrl( url, width );
 	};
 
 	/**
@@ -324,7 +324,7 @@ wikibase.queryService.ui.resultBrowser.ImageResultBrowser = ( function( $, _ ) {
 	 * Check if this value contains an image.
 	 */
 	SELF.prototype._checkImage = function( data ) {
-		if ( data && data.value && this._isCommonsResource( data.value ) ) {
+		if ( data && data.value && this._isMediaResource( data.value ) ) {
 			this._drawable = true;
 			return false;
 		}

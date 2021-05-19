@@ -143,13 +143,13 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			object: null,
 			$element: null
 		},
-		Polestar: {
-			icon: 'fa-certificate',
-			label: [ 'wdqs-app-resultbrowser-graph-builder', 'Graph builder' ],
-			class: 'PolestarResultBrowser',
-			object: null,
-			$element: null
-		},
+		// Polestar: {
+		// 	icon: 'fa-certificate',
+		// 	label: [ 'wdqs-app-resultbrowser-graph-builder', 'Graph builder' ],
+		// 	class: 'PolestarResultBrowser',
+		// 	object: null,
+		// 	$element: null
+		// },
 		Map: {
 			icon: 'glyphicon-map-marker',
 			label: [ 'wdqs-app-resultbrowser-map', 'Map' ],

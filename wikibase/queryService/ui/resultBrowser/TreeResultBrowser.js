@@ -1,4 +1,4 @@
-var wikibase = window.wikibase || {};
+var wikibase = wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
@@ -128,8 +128,8 @@ wikibase.queryService.ui.resultBrowser.TreeResultBrowser = ( function( $, _, win
 					nodes[currentNode].text = ( nodes[currentNode].text || '' ) + ' ' + field.value;
 				}
 
-				if ( currentNode && format.isCommonsResource( field.value ) ) {
-					nodes[currentNode].icon = format.getCommonsResourceThumbnailUrl( field.value, 24 );
+				if ( currentNode && format.isMediaResource( field.value ) ) {
+					nodes[currentNode].icon = format.getMediaResourceThumbnailUrl( field.value, 24 );
 				}
 
 				if ( format.isEntity( field ) ) {

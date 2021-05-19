@@ -1,4 +1,4 @@
-var wikibase = window.wikibase || {};
+var wikibase = wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
@@ -7,8 +7,9 @@ wikibase.queryService.ui.resultBrowser.helper = wikibase.queryService.ui.resultB
 wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, moment ) {
 	'use strict';
 
-	var COMMONS_FILE_PATH = 'http://commons.wikimedia.org/wiki/special:filepath/',
-		COMMONS_FILE_PATH_MEDIAVIEWER = 'https://commons.wikimedia.org/wiki/File:{FILENAME}',
+	var MEDIA_FILE_PATH_REGX = /(.*)(?:\/File\:|\/Special\:FilePath\/)(?:[^\/]*)/ig,
+		COMMONS_FILE_PATH = 'http://commons.wikimedia.org/wiki/Special:FilePath/',
+		COMMONS_FILE_PATH_MEDIAVIEWER = 'https://commons.wikimedia.org/wiki/Special:FilePath/{FILENAME}',
 		DATATYPE_DATETIME = 'http://www.w3.org/2001/XMLSchema#dateTime',
 		TYPE_URI = 'uri',
 		DATATYPE_STRING = 'http://www.w3.org/2001/XMLSchema#string',
@@ -150,20 +151,23 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 			var $link = $( '<a>' ).attr( { title: title, href: value, target: '_blank', class: 'item-link', rel: 'noopener' } );
 			$html.append( $link );
 
-			if ( this.isCommonsResource( value ) ) {
-				$link.attr( 'href', this.getCommonsResourceFullUrl( value ) );
-				$link.attr( 'title', title + ': commons:' + this.getCommonsResourceFileName( value ) );
+			if ( this.isMediaResource( value ) ) {
+				$link.attr( 'href', this.getMediaResourceFullUrl( value ) );
+				$link.attr( 'title', title + ': media:' + this.getMediaResourceFileName( value ) );
 				if ( embed ) {
-					$link.click( this.handleCommonResourceItem );
+					$link.click( this.handleMediaResourceItem );
 					$link.append(
 							$( '<img>' ).attr( 'src',
-									this.getCommonsResourceThumbnailUrl( value, '120' ) ) )
+									this.getMediaResourceThumbnailUrl( value, '120' ) ) )
 							.width( '120' );
 				} else {
-					$link.attr( { href: COMMONS_FILE_PATH_MEDIAVIEWER.replace( /{FILENAME}/g,
-							this.getCommonsResourceFileName( value ) ) } );
-					$link.text( 'commons:' +
-							decodeURIComponent( this.getCommonsResourceFileName( value ) ) );
+					if ( this.isCommonsResource( value ) ) {
+						$link.attr( { href: COMMONS_FILE_PATH_MEDIAVIEWER.replace( /{FILENAME}/g,
+								this.getMediaResourceFileName( value ) ) } );
+							}
+
+					$link.text( 'media:' +
+							decodeURIComponent( this.getMediaResourceFileName( value ) ) );
 					$html.prepend( this.createGalleryButton( value, title ), ' ' );
 				}
 			} else {
@@ -285,6 +289,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 
 	/**
 	 * Checks whether given url is commons resource URL
+	 * Checks whether given url is media resource URL
 	 *
 	 * @param {string} url
 	 * @return {boolean}
@@ -294,45 +299,62 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	};
 
 	/**
-	 * Returns the file name of a commons resource URL
+	 * Checks whether given url is media resource URL
+	 *
+	 * @param {string} url
+	 * @return {boolean}
+	 */
+	SELF.prototype.isMediaResource = function( url ) {
+		return url.match( MEDIA_FILE_PATH_REGX ) !== null;
+	};
+
+	/**
+	 * Returns the file name of a media resource URL
 	 *
 	 * @param {string} url
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceFileName = function( url ) {
-		// FIXME: Dots in the constant must be escaped before using it as a regex!
-		var regExp = new RegExp( COMMONS_FILE_PATH, 'ig' );
+	SELF.prototype.getMediaResourceFileName = function( url ) {
+		if ( !this.isMediaResource( url ) ) {
+			return url;
+		}
 
-		return decodeURIComponent( url.replace( regExp, '' ) );
+		return decodeURIComponent( url.split( '/' ).pop().split( '?' ).shift() );
 	};
 
 	/**
-	 * Returns the full URL for a commons resource URI.
+	 * Returns the full URL for a media resource URI.
 	 *
 	 * @param {string} uri
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceFullUrl = function( uri ) {
-		if ( !this.isCommonsResource( uri ) ) {
+	SELF.prototype.getMediaResourceFullUrl = function( uri ) {
+		if ( !this.isMediaResource( uri ) ) {
 			return uri;
 		}
+		uri = uri.split( '?' ).shift();
+		uri = uri.replace(/^http:/, 'https:');
+		uri = uri.replace('/File:', '/Special:FilePath/');
 
-		return uri.replace( /^http:/, 'https:' );
+		return uri;
 	};
 
 	/**
-	 * Returns a thumbnail URL for the given commons resource URI.
+	 * Returns a thumbnail URL for the given media resource URI.
 	 *
 	 * @param {string} uri
 	 * @param {number} [width]
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceThumbnailUrl = function( uri, width ) {
-		if ( !this.isCommonsResource( uri ) ) {
+	SELF.prototype.getMediaResourceThumbnailUrl = function( uri, width ) {
+		console.log(`thumbi ${uri}`);
+		if ( !this.isMediaResource( uri ) ) {
 			return uri;
 		}
-
-		return uri.replace( /^http:/, 'https:' ) + '?width=' + ( width || 400 );
+		uri = uri.split( '?' ).shift();
+		uri = uri.replace(/^http:/, 'https:');
+		uri = uri.replace('/File:', '/Special:FilePath/');
+		return uri + '?width=' + ( width || 400 );
 	};
 
 	/**
@@ -343,8 +365,8 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {jQuery}
 	 */
 	SELF.prototype.createGalleryButton = function( url, galleryId ) {
-		var fileName = this.getCommonsResourceFileName( url ),
-			thumbnail = this.getCommonsResourceThumbnailUrl( url, 900 );
+		var fileName = this.getMediaResourceFileName( url ),
+			thumbnail = this.getMediaResourceThumbnailUrl( url, 900 );
 
 		var $button = $( '<a>' ).attr( {
 			title: 'Show Gallery',
@@ -355,7 +377,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 			'data-title': decodeURIComponent( fileName )
 		} );
 
-		$button.click( this.handleCommonResourceItem );
+		$button.click( this.handleMediaResourceItem );
 
 		return $button;
 	};
@@ -440,9 +462,9 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	};
 
 	/**
-	 * Handler for commons resource links
+	 * Handler for media resource links
 	 */
-	SELF.prototype.handleCommonResourceItem = function( e ) {
+	SELF.prototype.handleMediaResourceItem = function( e ) {
 		e.preventDefault();
 
 		$( this ).ekkoLightbox( {

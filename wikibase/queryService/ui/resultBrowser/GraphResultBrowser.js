@@ -1,4 +1,4 @@
-var wikibase = window.wikibase || {};
+var wikibase = wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
@@ -194,8 +194,8 @@ wikibase.queryService.ui.resultBrowser.GraphResultBrowser = ( function( $, vis, 
 					rows[rowIndex] = node.id;
 				}
 			}
-			if ( format.isCommonsResource( field.value ) ) {
-				node.image = format.getCommonsResourceThumbnailUrl( field.value, 150 );
+			if ( format.isMediaResource( field.value ) ) {
+				node.image = format.getMediaResourceThumbnailUrl( field.value, 150 );
 				node.shape = 'image';
 				node.font = { color: 'black' };
 			}

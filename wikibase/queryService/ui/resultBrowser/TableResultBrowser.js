@@ -1,4 +1,4 @@
-var wikibase = window.wikibase || {};
+var wikibase = wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
@@ -148,7 +148,7 @@ wikibase.queryService.ui.resultBrowser.TableResultBrowser = ( function( $, windo
 
 		var events = {
 			'click .explore': $.proxy( this._getFormatter().handleExploreItem, this ),
-			'click .gallery': this._getFormatter().handleCommonResourceItem
+			'click .gallery': this._getFormatter().handleMediaResourceItem
 		};
 
 		$element.bootstrapTable( {

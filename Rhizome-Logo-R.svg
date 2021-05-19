@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 127.99999 137.25473"
+   version="1.1"
+   id="svg42"
+   width="128"
+   height="137.25473">
+  <metadata
+     id="metadata46">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Asset 1</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10">
+    <style
+       id="style2">.cls-1,.cls-6{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3{fill:#231f20;}.cls-4{opacity:0.5;}.cls-5{clip-path:url(#clip-path-3);}.cls-6{stroke:#231f20;stroke-width:0.5px;}</style>
+    <clipPath
+       id="clip-path"
+       transform="translate(-5.79)">
+      <rect
+         class="cls-1"
+         x="5.79"
+         width="128.49001"
+         height="110.6"
+         id="rect4"
+         y="0"
+         style="fill:none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-3"
+       transform="translate(-5.79)">
+      <rect
+         class="cls-1"
+         y="22.16"
+         width="137.57001"
+         height="11.71"
+         id="rect7"
+         x="0"
+         style="fill:none" />
+    </clipPath>
+  </defs>
+  <title
+     id="title12">Asset 1</title>
+  <path
+     class="cls-3"
+     d="m 89.91324,39.225805 c 0,16.7297 -14.238045,27.692991 -36.30701,27.692991 H 39.368186 V 8.115685 h 8.115685 c 28.476084,0 42.073414,15.590655 42.073414,31.11012 M 0,0 15.733038,13.88209 V 121.09455 L 0.21357114,135.33259 H 55.528365 L 39.937709,121.09455 V 74.963292 h 5.766406 L 70.69188,109.77531 c 14.23804,19.79087 29.61513,27.47942 43.85317,27.47942 4.58007,-0.0103 9.12671,-0.78027 13.45495,-2.27809 -12.67185,-3.48832 -21.35707,-10.74972 -37.0901,-35.595105 L 74.74972,74.1802 C 94.967745,70.691878 114.901,57.09455 114.901,33.60178 114.901,15.163515 98.812015,0.14238 58.447165,0.14238 Z"
+     id="path14"
+     style="fill:#231f20;stroke-width:7.11902142" />
+</svg>

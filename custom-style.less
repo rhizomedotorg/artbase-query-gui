@@ -1,0 +1,99 @@
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Regular.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Regular.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Regular.woff") format("woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Bold.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Bold.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Bold.woff") format("woff");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-BoldItalic.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-BoldItalic.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-BoldItalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-LightItalic.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-LightItalic.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-LightItalic.woff") format("woff");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Light.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Light.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Light.woff") format("woff");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "HKGrotesk";
+    src: url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Italic.ttf") format('truetype'),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Italic.woff2") format("woff2"),
+         url("https://artbase.rhizome.org/w/resources/assets/artbase/HKGrotesk/HKGrotesk-Italic.woff") format("woff");
+    font-style: italic;
+}
+
+
+body {
+    font-family: 'HK Grotesk';
+    color: #000;
+    font-size: 16px;
+}
+
+.CodeMirror {
+    font-size: 14px;
+}
+
+
+
+// remove inactive status bars below editor
+.query-helper-tag-cloud,
+.status.navbar.navbar-default {
+    display: none;
+}
+
+.query-main {
+    border-bottom: 1px solid @border-color-base--disabled;
+}
+
+.artbase-branding {
+    padding: .5rem 15px 0;
+    .artbase-rhizome-logo {
+        position: relative;
+        top: -2px;
+        margin-right: 6px;
+    }
+}
+
+
+/* QUERY RESULTS */
+#query-result {
+    font-size: 14px;
+    .bootstrap-table {
+	    padding: 0 !important;
+    }
+}
+
+button[name=paginationSwitch] {
+	display: none !important;
+}
+
+.fixed-table-pagination {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

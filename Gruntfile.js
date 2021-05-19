@@ -148,7 +148,7 @@ module.exports = function( grunt ) {
 							cwd: './',
 							src: [
 									'*.html',
-									'logo.svg', 'logo-embed.svg', 'robots.txt', 'favicon.*'
+									'robots.txt', 'favicon.*'
 							],
 							dest: buildFolder
 						},{
@@ -179,6 +179,22 @@ module.exports = function( grunt ) {
 							],
 							dest: buildFolder + '/default-config.json',
 							filter: 'isFile'
+						},
+						{// json custom config
+							expand: false,
+							src: [
+								'custom-config.json'
+							],
+							dest: buildFolder + '/custom-config.json',
+							filter: 'isFile'
+						},
+						{// extra assets
+							expand: true,
+							cwd: './',
+							src: [
+								'Rhizome-Logo-R.svg'
+							],
+							dest: buildFolder
 						}
 				]
 			}
